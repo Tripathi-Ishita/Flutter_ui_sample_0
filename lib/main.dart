@@ -42,6 +42,30 @@ class MainScreen extends StatelessWidget {
     "Charlotte",
     "Amelia"
   ];
+  final List<String> Dashboard = [
+    "Work",
+    "Paint",
+    "Meeting",
+    "Deadline",
+    "Communication",
+    "Teamwork",
+    "Presentation",
+    "Project",
+    "Document",
+    "Strategy"
+  ];
+  final List<IconData> DashIcons = [
+    Icons.work_outline_outlined,
+    Icons.color_lens_outlined,
+    Icons.people_alt_outlined,
+    Icons.work_history_outlined,
+    Icons.speaker_notes_outlined,
+    Icons.handshake_outlined,
+    Icons.screen_share_outlined,
+    Icons.task_outlined,
+    Icons.note_outlined,
+    Icons.games_outlined
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +79,7 @@ class MainScreen extends StatelessWidget {
         ),
         title: Text(
           "Discover",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black,fontFamily: "Pacifico",fontSize: 30,fontWeight: FontWeight.w400),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -76,7 +100,6 @@ class MainScreen extends StatelessWidget {
                 )
               ];
             },
-            color: Colors.black,
           )
         ],
       ),
@@ -87,6 +110,7 @@ class MainScreen extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.orange[100],
+                  border: Border.all(color: Colors.deepOrange),
                   borderRadius: BorderRadius.circular(10)),
               height: MediaQuery.of(context).size.height * 0.2,
               width: MediaQuery.of(context).size.width * 0.9,
@@ -150,27 +174,28 @@ class MainScreen extends StatelessWidget {
                 itemCount: Names.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    width: MediaQuery.of(context).size.width*0.26,
+                    width: MediaQuery.of(context).size.width*0.30,
                     margin: EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(40)
                     ),
                     padding: EdgeInsets.all(10),
-                    height: MediaQuery.of(context).size.height*.6,
+
                     child: Card(
+                      shadowColor: Colors.pink,
                       shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       elevation: 10,
-                      shadowColor: Colors.black,
+                      surfaceTintColor: Colors.deepOrange,
                       child: Column(
                         children: [
                           Image(
                             image: AssetImage(Profile[index]),
-                            width: MediaQuery.of(context).size.width*.16,
+                            width: MediaQuery.of(context).size.width*.18,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(Names[index]),
+                            child: Text(Names[index],style: TextStyle(fontFamily: 'Pacifico',fontSize: 16),),
                           )
                         ],
                       ),
@@ -182,7 +207,7 @@ class MainScreen extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child:Text("Dasboard ✈️",
+              child:Text("Dashboard ✈️",
                 style: TextStyle(
                   fontFamily: "Pacifico",
                   fontSize: 25,
@@ -197,24 +222,47 @@ class MainScreen extends StatelessWidget {
               itemCount: Names.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(2),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(30)
                   ),
                   padding: EdgeInsets.all(10),
                   height: MediaQuery.of(context).size.height*.3,
-                  child: Column(
-                    children: [
-                      Image(
-                        image: AssetImage(Profile[index]),
-                        width: MediaQuery.of(context).size.width*.16,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(Names[index]),
-                      )
-                    ],
+                  width: MediaQuery.of(context).size.width*.38,
+
+                  child: Card(
+                    elevation: 5,
+                    shadowColor: Colors.pink,
+                    surfaceTintColor: Colors.deepOrange,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:BorderRadius.circular(28)
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 10,left: 10,right: 10),
+                            alignment: Alignment.topLeft
+                            ,child: Icon(DashIcons[index],size: 40)),
+
+                        Container(
+                            padding: EdgeInsets.only(bottom: 20,left: 15,top: 5),
+                            alignment: Alignment.topLeft
+                            ,child: Text(Dashboard[index],style: TextStyle(fontFamily: 'Pacifico',fontSize: 16),)),
+                        Container(
+                          height: 5,
+                          width: 100,
+                          child: LinearProgressIndicator(
+                            value: 0.7,
+                            valueColor:AlwaysStoppedAnimation(
+                              Colors.deepOrangeAccent
+                            ),
+                            backgroundColor: Colors.grey,
+
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               }),)
